@@ -1,13 +1,13 @@
-phpunit (){
+phpunitify (){
 	COMMAND=$(echo $@ | sed -e 's/--/ /g')
-	./vendor/bin/phpunit $@
+    vagrant ssh -c "cd /vagrant && ./vendor/bin/phpunit --stop-on-failure" $@
 	CODE=$?
 
 	if [[ $CODE = 0 ]]; then
-		MESSAGE="Tests ran succesfully (${COMMAND})"
+        MESSAGE="Tests passing :)"
 		IMAGE="emblem-default"
 	else
-		MESSAGE="Tests are broken"
+		MESSAGE="Tests failing :("
 		IMAGE="software-update-urgent"
 	fi
 
